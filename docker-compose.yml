@@ -1,0 +1,39 @@
+services:
+  api_service:
+    build: ./api_service
+    ports:
+      - "5000:5000"
+    depends_on:
+      - auth_service
+      - prediction_service
+
+  auth_service:
+    build: ./auth_service
+    ports:
+      - "5001:5001"
+    depends_on:
+      - mongo
+
+  prediction_service:
+    build: ./prediction_service
+    ports:
+      - "5002:5002"
+
+  logger_service:
+    build: ./logger_service
+    ports:
+      - "5003:5003"
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo
+    container_name: mongo
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+volumes:
+  mongo_data:
