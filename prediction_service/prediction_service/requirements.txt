@@ -1,8 +1,0 @@
-flask
-redis
-gunicorn
-numpy
-requests
-torch
-pykeen
-pika
