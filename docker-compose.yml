@@ -1,4 +1,39 @@
 services:
+
+  rabbitmq:
+    image: "rabbitmq:3-management"
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"  # Puerto para comunicación AMQP
+      - "15672:15672"  # Puerto para la interfaz web de RabbitMQ
+    environment:
+      RABBITMQ_DEFAULT_USER: "user"
+      RABBITMQ_DEFAULT_PASS: "password"
+    healthcheck:
+      test: ["CMD", "rabbitmqctl", "status"]
+      interval: 5s
+      retries: 5
+      timeout: 10s
+
+  mongo_logger:
+    image: mongo:latest
+    container_name: mongo_logger
+    restart: always
+    ports:
+      - "27019:27017"
+    volumes:
+      - mongo_logger_data:/data/db
+      -
+  logger_service:
+    build: ./logger_service
+    ports:
+      - "8003:8003"
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+      mongo_logger:
+        condition: service_started
+
   api_service:
     build: ./api_service
     ports:
@@ -19,21 +54,5 @@ services:
     ports:
       - "5002:5002"
 
-  logger_service:
-    build: ./logger_service
-    ports:
-      - "5003:5003"
-    depends_on:
-      - mongo
-
-  mongo:
-    image: mongo
-    container_name: mongo
-    restart: always
-    ports:
-      - "27017:27017"
-    volumes:
-      - mongo_data:/data/db
-
 volumes:
-  mongo_data:
+  mongo_logger_data:
