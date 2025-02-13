@@ -18,7 +18,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 # Exponer el puerto
-EXPOSE 5001
+EXPOSE 8001
 
 # Ejecutar Gunicorn correctamente
-CMD ["gunicorn", "--workers", "3", "--bind", "0.0.0.0:5001", "app:create_app()"]
+CMD ["gunicorn", "--workers", "3", "--bind", "0.0.0.0:8001", "app:create_app()"]

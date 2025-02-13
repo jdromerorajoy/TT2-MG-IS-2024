@@ -1,20 +1,14 @@
 from flask import Flask
-from flask_pymongo import PyMongo
 from app.routes import bp
-from app.config import Config
-
-mongo = PyMongo()
+from app.database import init_db
+from app.utils.logger_client import LoggerClient
 
 def create_app():
-    """Inicializa la aplicación Flask y configura MongoDB"""
+    """Inicializa Flask con MongoDB"""
     app = Flask(__name__)
-    app.config.from_object(Config)
 
-    # Inicializar MongoDB
-    mongo.init_app(app)
-
-    # Agregar MongoDB a la aplicación para que sea accesible en routes.py
-    app.mongo = mongo
-
+    init_db(app)  # Conectar MongoDB
     app.register_blueprint(bp)
+
+    LoggerClient.info("Auth Service iniciado correctamente")
     return app

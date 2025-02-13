@@ -34,6 +34,37 @@ services:
       mongo_logger:
         condition: service_started
 
+  mongo_auth:
+    image: mongo:latest
+    container_name: mongo_auth
+    restart: always
+    ports:
+      - "27018:27017"
+    volumes:
+      - mongo_auth_data:/data/db
+
+  auth_service:
+    build: ./auth_service
+    ports:
+      - "8001:8001"
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+      logger_service:
+        condition: service_started
+      mongo_auth:
+        condition: service_started
+
+  prediction_service:
+    build: ./prediction_service
+    ports:
+      - "8002:8002"
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+      logger_service:
+        condition: service_started
+
   api_service:
     build: ./api_service
     ports:
@@ -42,17 +73,6 @@ services:
       - auth_service
       - prediction_service
 
-  auth_service:
-    build: ./auth_service
-    ports:
-      - "5001:5001"
-    depends_on:
-      - mongo
-
-  prediction_service:
-    build: ./prediction_service
-    ports:
-      - "5002:5002"
-
 volumes:
   mongo_logger_data:
+  mongo_auth_data:
