@@ -1,15 +1,25 @@
 from flask import Blueprint, request, jsonify
-import requests
+from app.middleware import require_auth, limiter, get_rate_limit
+from app.services import PredictionClient
+from app.utils.logger_client import LoggerClient
 
-bp = Blueprint('api', __name__)
+bp = Blueprint("api", __name__)
 
-PREDICTION_SERVICE = "http://prediction_service:5002"
-
-@bp.route('/predict', methods=['POST'])
+@bp.route("/predict", methods=["POST"])
+@require_auth
+@limiter.limit(get_rate_limit)
 def predict():
-    inputs = request.json.get('inputs', [])
+    """Endpoint para obtener predicción desde `prediction_service`"""
+    inputs = request.json.get("inputs", [])
+
     if not inputs:
+        LoggerClient.warning("Solicitud sin datos de entrada")
         return jsonify({"error": "No input provided"}), 400
 
-    response = requests.post(f"{PREDICTION_SERVICE}/predict", json={"inputs": inputs})
-    return response.json(), response.status_code
+    result = PredictionClient.get_prediction(inputs)
+    return jsonify(result)
+
+@bp.route("/test-log", methods=["GET"])
+def test_log():
+    LoggerClient.info("Este es un test desde API Service usando RabbitMQ")
+    return jsonify({"message": "Log enviado a RabbitMQ"}), 200

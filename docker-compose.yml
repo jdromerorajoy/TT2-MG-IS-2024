@@ -68,10 +68,16 @@ services:
   api_service:
     build: ./api_service
     ports:
-      - "5000:5000"
+      - "8000:8000"
     depends_on:
-      - auth_service
-      - prediction_service
+      rabbitmq:
+        condition: service_healthy
+      logger_service:
+        condition: service_started
+      auth_service:
+        condition: service_started
+      prediction_service:
+        condition: service_started
 
 volumes:
   mongo_logger_data:
