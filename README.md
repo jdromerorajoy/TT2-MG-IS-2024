@@ -12,6 +12,9 @@ Este proyecto implementa una **API de predicción** con **autenticación basada 
 4. [🔄 Flujo de trabajo](#flujo-de-trabajo)
 5. [📝 Endpoints disponibles](#endpoints-disponibles)
 6. [📊 Pruebas y monitoreo](#pruebas-y-monitoreo)
+7. [📝 Pruebas HTTP](#pruebas-http)
+8. [🛠 Detener los Servicios](#detener-los-servicios)
+9. [📌 Pendientes y Mejoras Futuras](#pendientes-y-mejoras-futuras)
 
 ---
 
@@ -160,3 +163,51 @@ Para evaluar el rendimiento y límites del API:
 4. Iniciar la prueba y analizar resultados.
 
 ---
+
+## 📝 **Pruebas HTTP**
+
+Los archivos de prueba se encuentran en la carpeta `scripts/`.
+Puedes probar los endpoints usando archivos `.http` directamente en **VS Code**.
+
+### 📌 **Ubicación de los archivos**
+
+```
+/scripts
+   ├── test.http
+```
+
+### ✅ **Ejecutar pruebas en VS Code**
+
+1. Instala la extensión **REST Client** en VS Code.
+2. Abre cualquier archivo `.http` dentro de `scripts/`.
+3. Haz clic en `Send Request` en la parte superior de la solicitud.
+
+---
+
+## 🛠 **Detener los Servicios**
+
+Para detener los servicios ejecuta:
+
+```bash
+docker-compose down
+```
+
+Si deseas eliminar los volúmenes de la base de datos:
+
+```bash
+docker-compose down -v
+```
+
+---
+
+## 📌 **Pendientes y Mejoras Futuras**
+- Implementar métricas para evaluar tiempos de respuesta.
+- Agregar autenticación robusta con JWT.
+- Mejorar la documentación con diagramas de arquitectura.
+
+
+
+
+
+
+

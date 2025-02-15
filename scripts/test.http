@@ -1,0 +1,31 @@
+### Validación de API Key
+POST http://localhost:8001/validate
+Content-Type: application/json
+
+{
+    "api_key": "freemium_key"
+}
+
+### Predicción con API Key Freemium
+POST http://localhost:8000/predict
+Authorization: freemium_key
+Content-Type: application/json
+
+{
+    "inputs": [
+        ["87441,1,417881", "87441,2,61240"],
+        ["87442,1,417881", "87442,2,59480"]
+    ]
+}
+
+### Predicción con API Key Premium
+POST http://localhost:8000/predict
+Authorization: premium_key
+Content-Type: application/json
+
+{
+    "inputs": [
+        ["87441,1,417881", "87441,2,61240"],
+        ["87442,1,417881", "87442,2,59480"]
+    ]
+}
