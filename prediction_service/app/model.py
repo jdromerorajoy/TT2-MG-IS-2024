@@ -1,7 +1,8 @@
 import torch
+import os
 
 # Cargar el modelo entrenado
-model_path = "/app/app/models/trained_model.pkl"
+model_path = os.path.join(os.path.dirname(__file__), "models", "trained_model.pkl")
 model = torch.load(model_path, map_location=torch.device('cpu'), weights_only=False)
 
 def predict_similarity(tensor_1, tensor_2):
