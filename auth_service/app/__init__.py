@@ -26,9 +26,7 @@ def create_app():
     # 🔥 Asegurar que la configuración se carga antes de inicializar la BD
     app.config.from_object(Config)
 
-    # 🔥 Llamar `init_app()` correctamente
-    init_db(app)  
-
-    app.register_blueprint(bp)
-    
+    LoggerClient.info("Auth Service iniciado correctamente")
     return app
+
+app = create_app()
