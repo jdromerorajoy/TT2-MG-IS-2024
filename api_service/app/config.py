@@ -15,7 +15,6 @@ class Config:
     redis_client = Redis(host=REDIS_HOST, port=REDIS_PORT, db=REDIS_DB, decode_responses=True)
 
     LOGGER_SERVICE_URL = os.getenv("LOGGER_SERVICE_URL", "http://logger_service:8003")
-
     RABBITMQ_HOST = "rabbitmq"
     RABBITMQ_PORT = 5672
     RABBITMQ_USER = "user"

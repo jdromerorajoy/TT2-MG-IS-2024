@@ -1,4 +1,5 @@
 from flask import Blueprint, request, jsonify
+from app.utils.logger_client import LoggerClient
 
 bp = Blueprint("auth", __name__)
 
@@ -14,6 +15,8 @@ def validate_api_key():
     api_key = data.get("api_key")
 
     if api_key in VALID_KEYS:
+        LoggerClient.info("✅ Autenticación exitosa")
         return jsonify({"valid": True}), 200
     else:
+        LoggerClient.warning("🚫 Autenticación fallida")
         return jsonify({"error": "Invalid API Key"}), 403
