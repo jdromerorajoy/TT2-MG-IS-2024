@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from app.middleware import require_auth, limiter, get_rate_limit, start_request, end_request
+from app.middleware import require_auth, limiter, get_rate_limit
 from app.services import PredictionClient
 from app.utils.logger_client import LoggerClient
 
