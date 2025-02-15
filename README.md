@@ -1,6 +1,18 @@
 # 🏗️ Arquitectura de Microservicios con Flask, RabbitMQ y MongoDB
 
+![Microservices](https://img.shields.io/badge/Microservices-Flask-blue)
+![RabbitMQ](https://img.shields.io/badge/RabbitMQ-Management-orange)
+![MongoDB](https://img.shields.io/badge/MongoDB-Database-green)
+![Redis](https://img.shields.io/badge/Redis-Cache-red)
+![Docker](https://img.shields.io/badge/Docker-Compose-blue)
+
+
+![Architecture Diagram](docs/img/logo.png)
+
+
+
 Este proyecto implementa una **API de predicción** con **autenticación basada en API Keys**, **limitación de solicitudes** y **registro de logs de manera asíncrona** mediante **RabbitMQ**. Está diseñado bajo una arquitectura de **microservicios** utilizando **Flask, MongoDB, Redis y Docker**.
+
 
 ---
 
@@ -8,13 +20,16 @@ Este proyecto implementa una **API de predicción** con **autenticación basada 
 
 1. [🔧 Características principales](#características-principales)
 2. [📂 Estructura del proyecto](#estructura-del-proyecto)
+3. [🏗️ Arquitectura](#arquitectura)
 3. [🚀 Instalación y configuración](#instalación-y-configuración)
 4. [🔄 Flujo de trabajo](#flujo-de-trabajo)
 5. [📝 Endpoints disponibles](#endpoints-disponibles)
+6. [🐇 RabbitMQ Management](#rabbitmq-management)
 6. [📊 Pruebas y monitoreo](#pruebas-y-monitoreo)
 7. [📝 Pruebas HTTP](#pruebas-http)
 8. [🛠 Detener los Servicios](#detener-los-servicios)
 9. [📌 Pendientes y Mejoras Futuras](#pendientes-y-mejoras-futuras)
+10. [📜 📑 ADR (Architectural Decision Records)](#adr-architectural-decision-records)
 
 ---
 
@@ -25,7 +40,7 @@ Este proyecto implementa una **API de predicción** con **autenticación basada 
 ✔️ **Cache con Redis** para mejorar el rendimiento\
 ✔️ **RabbitMQ para logs asíncronos**\
 ✔️ **MongoDB como base de datos principal**\
-✔️ **Arquitectura modular basada en microservicios**\
+✔️ **Arquitectura basada en microservicios**\
 ✔️ **Pruebas de carga con Locust**\
 ✔️ **Docker Compose para fácil despliegue**
 
@@ -40,13 +55,19 @@ Este proyecto implementa una **API de predicción** con **autenticación basada 
 │   ├── prediction_service/   # Servicio de predicción
 │   ├── logger_service/       # Servicio de logs
 │   ├── load_tests/           # Pruebas de carga con Locust
+│   ├── scripts/              # Scripts de pruebas HTTP
+│   ├── docs/                 # Documentación y ADRs
 │
 ├── docker-compose.yml        # Orquestación de contenedores
 ├── README.md                 # Documentación del proyecto
 ```
 
 ---
+## 🏗️ Arquitectura
 
+![Architecture Diagram](docs/diagram-v3.jpeg)
+
+---
 ## 🚀 Instalación y configuración
 
 ### ✅ Requisitos previos
@@ -144,7 +165,17 @@ curl -X POST http://localhost:8000/predict \
   "cached": false
 }
 ```
+---
 
+## 🐇 RabbitMQ Management
+
+Para acceder al panel de administración de RabbitMQ:
+
+1. Abre tu navegador y accede a `http://localhost:15672`
+2. Ingresa con las credenciales `user:password`
+3. Explora las colas y mensajes en el panel de control.
+4. Puedes ver los logs de los servicios en tiempo real.
+5. ¡Listo! 🚀
 
 ---
 
@@ -205,6 +236,22 @@ docker-compose down -v
 - Agregar autenticación robusta con JWT.
 - Mejorar la documentación con diagramas de arquitectura.
 
+
+## 📜 📑 ADR (Architectural Decision Records)
+
+Este proyecto documenta las decisiones arquitectónicas tomadas mediante **ADR**. 
+
+### 📌 Lista de ADRs:
+
+| **ADR**                         | **Descripción** |
+|---------------------------------|--------------|
+| [ADR-001](docs/adrs/adr-001.md) | Uso de modelo ya entrenado en lugar de entrenar en tiempo real. |
+| [ADR-002](docs/adrs/adr-002.md) | No se utiliza UUID en logs, sino identificación por microservicio. |
+| [ADR-003](docs/adrs/adr-003.md) | Se usa `api_service` en lugar de un API Gateway en entorno local. |
+
+Cada ADR se encuentra documentado en la carpeta **`docs/`**.
+
+📌 **Para más detalles sobre las decisiones arquitectónicas, consulta los archivos en `docs/`.** 🚀
 
 
 
