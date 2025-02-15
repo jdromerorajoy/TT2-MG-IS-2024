@@ -37,7 +37,6 @@ Este proyecto implementa una **API de predicción** con **autenticación basada 
 │   ├── prediction_service/   # Servicio de predicción
 │   ├── logger_service/       # Servicio de logs
 │   ├── load_tests/           # Pruebas de carga con Locust
-│   ├── rabbitmq/             # Configuración de RabbitMQ
 │
 ├── docker-compose.yml        # Orquestación de contenedores
 ├── README.md                 # Documentación del proyecto
