@@ -10,5 +10,7 @@ def create_app():
     init_db(app)  # Conectar MongoDB
     app.register_blueprint(bp)
 
-    #LoggerClient.info("Auth Service iniciado correctamente")
+    LoggerClient.info("Auth Service iniciado correctamente")
     return app
+
+app = create_app()

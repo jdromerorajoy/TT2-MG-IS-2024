@@ -78,6 +78,16 @@ services:
       prediction_service:
         condition: service_started
 
+  locust_service:
+    build: ./load_tests
+    container_name: locust_service
+    ports:
+      - "8089:8089"
+    depends_on:
+      - api_service
+    environment:
+      - LOCUST_HOST=http://localhost:8089
+
 volumes:
   mongo_logger_data:
   mongo_auth_data:
