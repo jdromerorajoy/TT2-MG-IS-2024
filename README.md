@@ -12,8 +12,6 @@ Este proyecto implementa una **API de predicción** con **autenticación basada 
 4. [🔄 Flujo de trabajo](#flujo-de-trabajo)
 5. [📝 Endpoints disponibles](#endpoints-disponibles)
 6. [📊 Pruebas y monitoreo](#pruebas-y-monitoreo)
-7. [👨‍💻 Contribuir](#contribuir)
-8. [📄 Licencia](#licencia)
 
 ---
 
@@ -43,7 +41,6 @@ Este proyecto implementa una **API de predicción** con **autenticación basada 
 │
 ├── docker-compose.yml        # Orquestación de contenedores
 ├── README.md                 # Documentación del proyecto
-└── .env                      # Variables de entorno
 ```
 
 ---
@@ -63,8 +60,8 @@ Antes de empezar, asegúrate de tener instalados:
 1️⃣ **Clonar el repositorio**
 
 ```sh
-git clone https://github.com/tu_usuario/tu_repositorio.git
-cd tu_repositorio
+git clone https://github.com/jdromerorajoy/TT2-MG-IS-2024.git
+cd TT2-MG-IS-2024
 ```
 
 2️⃣ **Levantar los contenedores con Docker**
@@ -146,18 +143,6 @@ curl -X POST http://localhost:8000/predict \
 }
 ```
 
----
-
-### 📜 Logs
-
-#### `GET /logs`
-
-**Descripción:** Recupera los logs almacenados en MongoDB.\
-**Ejemplo:**
-
-```sh
-curl -X GET http://localhost:8003/logs
-```
 
 ---
 
@@ -176,19 +161,3 @@ Para evaluar el rendimiento y límites del API:
 4. Iniciar la prueba y analizar resultados.
 
 ---
-
-## 👨‍💻 Contribuir
-
-Si deseas contribuir:
-
-1. Haz un **fork** del repositorio.
-2. Crea una **nueva rama** (`feature-nueva-funcionalidad`).
-3. Realiza tus cambios y **haz un commit**.
-4. Abre un **Pull Request**.
-
----
-
-## 📄 Licencia
-
-Este proyecto está bajo la **MIT License**.
-
