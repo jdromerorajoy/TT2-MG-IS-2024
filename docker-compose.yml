@@ -23,7 +23,6 @@ services:
       - "27019:27017"
     volumes:
       - mongo_logger_data:/data/db
-      -
   logger_service:
     build: ./logger_service
     ports:

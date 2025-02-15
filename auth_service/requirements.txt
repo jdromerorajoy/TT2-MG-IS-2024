@@ -4,3 +4,4 @@ redis
 gunicorn
 requests
 pika
+pymongo
