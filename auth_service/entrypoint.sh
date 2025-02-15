@@ -1,10 +1,8 @@
 #!/bin/bash
 
-# Iniciar Gunicorn en segundo plano
-gunicorn --workers 3 --bind 0.0.0.0:8003 "app:create_app" &
+python init_db.py &
 
-# Esperar 3 segundos para asegurar que Gunicorn esté activo
 sleep 3
 
-# Iniciar el consumidor de RabbitMQ
-exec python init_db.py
+# Iniciar Gunicorn en segundo plano
+gunicorn --workers 3 --bind 0.0.0.0:8001 "app:create_app"

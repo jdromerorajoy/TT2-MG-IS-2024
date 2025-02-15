@@ -24,7 +24,7 @@ if client is None:
     exit(1)
 
 # Colección de API Keys
-api_keys_collection = db["auth"]
+api_keys_collection = db["api_keys"]
 
 # Datos predefinidos
 default_keys = [

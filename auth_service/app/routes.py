@@ -1,4 +1,5 @@
 from flask import Blueprint, request, jsonify
+from app.utils.logger_client import LoggerClient
 from app.services import AuthService
 
 bp = Blueprint("auth", __name__)

@@ -6,10 +6,10 @@ from app.utils.logger_client import LoggerClient
 bp = Blueprint("api", __name__)
 
 @bp.route("/predict", methods=["POST"])
-@start_request  # 📌 1️⃣ Inicia el timer y loggea el inicio de la request
-@require_auth   # 📌 2️⃣ Valida autenticación y loggea después de éxito
-@limiter.limit(get_rate_limit)  # 📌 3️⃣ Aplica Rate Limiting
-@end_request    # 📌 4️⃣ Registra el tiempo total de ejecución
+@start_request
+@require_auth
+@limiter.limit(get_rate_limit)
+@end_request
 def predict():
     """Endpoint para obtener predicción desde `prediction_service`"""
 

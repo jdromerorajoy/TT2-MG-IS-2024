@@ -15,6 +15,6 @@ ENV PYTHONPATH="/app"
 # Agregar permisos de ejecución al script de entrypoint
 RUN chmod +x /app/entrypoint.sh
 
-EXPOSE 8003
+EXPOSE 8001
 
 ENTRYPOINT ["/bin/bash", "/app/entrypoint.sh"]

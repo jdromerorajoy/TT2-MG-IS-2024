@@ -10,7 +10,7 @@ class AuthService:
         if not api_key:
             return {"error": "API key missing"}, 401
 
-        user = mongo.db.api_keys.find_one({"api_key": api_key})  # 📌 Buscar en la colección api_keys
+        user = mongo.db.api_keys.find_one({"api_key": api_key})
         if not user:
             LoggerClient.warning(f"🚫 Intento de acceso con API key inválida: {api_key}")
             return {"error": "Unauthorized"}, 403

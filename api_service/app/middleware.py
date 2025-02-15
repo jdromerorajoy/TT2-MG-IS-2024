@@ -15,8 +15,8 @@ limiter = Limiter(
 def start_request(f):
     """Middleware para registrar inicio de la request"""
     def wrapper(*args, **kwargs):
-        g.start_time = time.time()  # Capturar tiempo de inicio
-        LoggerClient.info("⏳ Inicio de request...")  # Log al inicio
+        g.start_time = time.time()
+        LoggerClient.info("⏳ Inicio de request...")
         return f(*args, **kwargs)
     return wrapper
 
