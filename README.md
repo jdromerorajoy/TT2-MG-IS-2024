@@ -30,6 +30,7 @@ Este proyecto implementa una **API de predicción** con **autenticación basada 
 8. [🛠 Detener los Servicios](#detener-los-servicios)
 9. [📌 Pendientes y Mejoras Futuras](#pendientes-y-mejoras-futuras)
 10. [📜 📑 ADR (Architectural Decision Records)](#adr-architectural-decision-records)
+11. [👤 Autores](#autores)
 
 ---
 
@@ -252,6 +253,14 @@ Este proyecto documenta las decisiones arquitectónicas tomadas mediante **ADR**
 Cada ADR se encuentra documentado en la carpeta **`docs/`**.
 
 📌 **Para más detalles sobre las decisiones arquitectónicas, consulta los archivos en `docs/`.** 🚀
+
+---
+
+## 👤 **Autores**
+
+- **Jorge Daniel Romero Rajoy** - [jdromerorajoy]
+- **Ramiro Eduardo Romero Eizmendi** - [raviolero]
+
 
 
 
