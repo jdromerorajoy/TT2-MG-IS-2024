@@ -13,6 +13,7 @@ def init_db(app):
     """Configura MongoDB con la aplicación Flask."""
     try:
         app.config["MONGO_URI"] = Config.MONGO_URI
+        print("🔥 init_db() fue llamado")
         mongo.init_app(app)
         db_logger.info("✅ Conexión con MongoDB establecida correctamente")
     except Exception as e:

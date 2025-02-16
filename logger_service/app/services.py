@@ -25,3 +25,7 @@ class LogService:
             logger.info(f"📌 Log almacenado en MongoDB: {message}")
         except Exception as e:
             logger.error(f"⚠️ Error al guardar log en MongoDB: {e}")
+            
+    @staticmethod
+    def get_data():
+        return {"data": "Mocked Data"}        
