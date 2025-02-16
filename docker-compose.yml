@@ -1,0 +1,93 @@
+services:
+
+  rabbitmq:
+    image: "rabbitmq:3-management"
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"  # Puerto para comunicación AMQP
+      - "15672:15672"  # Puerto para la interfaz web de RabbitMQ
+    environment:
+      RABBITMQ_DEFAULT_USER: "user"
+      RABBITMQ_DEFAULT_PASS: "password"
+    healthcheck:
+      test: ["CMD", "rabbitmqctl", "status"]
+      interval: 5s
+      retries: 5
+      timeout: 10s
+
+  mongo_logger:
+    image: mongo:latest
+    container_name: mongo_logger
+    restart: always
+    ports:
+      - "27019:27017"
+    volumes:
+      - mongo_logger_data:/data/db
+  logger_service:
+    build: ./logger_service
+    ports:
+      - "8003:8003"
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+      mongo_logger:
+        condition: service_started
+
+  mongo_auth:
+    image: mongo:latest
+    container_name: mongo_auth
+    restart: always
+    ports:
+      - "27018:27017"
+    volumes:
+      - mongo_auth_data:/data/db
+
+  auth_service:
+    build: ./auth_service
+    ports:
+      - "8001:8001"
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+      logger_service:
+        condition: service_started
+      mongo_auth:
+        condition: service_started
+
+  prediction_service:
+    build: ./prediction_service
+    ports:
+      - "8002:8002"
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+      logger_service:
+        condition: service_started
+
+  api_service:
+    build: ./api_service
+    ports:
+      - "8000:8000"
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+      logger_service:
+        condition: service_started
+      auth_service:
+        condition: service_started
+      prediction_service:
+        condition: service_started
+
+  locust_service:
+    build: ./load_tests
+    container_name: locust_service
+    ports:
+      - "8089:8089"
+    depends_on:
+      - api_service
+    environment:
+      - LOCUST_HOST=http://localhost:8089
+
+volumes:
+  mongo_logger_data:
+  mongo_auth_data:

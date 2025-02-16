@@ -1,0 +1,6 @@
+flask
+requests
+flask-limiter
+redis
+gunicorn
+pika
