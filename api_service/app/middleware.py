@@ -5,11 +5,15 @@ from flask import request, jsonify, g
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 from app.utils.logger_client import LoggerClient
+from redis import Redis
+
+# Inicializar Redis para caching y limitación de tasa
+redis_client = Redis.from_url(os.getenv("REDIS_URL", "redis://localhost:6379"))
 
 # Inicializar Rate Limiter con Redis
 limiter = Limiter(
     key_func=get_remote_address,
-    storage_uri=os.getenv("REDIS_URL", "redis://redis:6379")
+    storage_uri=os.getenv("REDIS_URL", "redis://localhost:6379")
 )
 
 def start_request(f):
@@ -19,7 +23,6 @@ def start_request(f):
         LoggerClient.info("⏳ Inicio de request...")
         return f(*args, **kwargs)
     return wrapper
-
 
 def require_auth(f):
     """Middleware de autenticación basado en API Key"""
@@ -35,7 +38,6 @@ def require_auth(f):
             return jsonify({"error": "Unauthorized"}), 403
 
         return f(*args, **kwargs)
-
     return wrapper
 
 def get_rate_limit():
