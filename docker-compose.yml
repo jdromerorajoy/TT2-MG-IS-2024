@@ -15,6 +15,12 @@ services:
       retries: 5
       timeout: 10s
 
+  redis:
+    image: redis:latest
+    container_name: redis
+    ports:
+      - "6379:6379"
+
   mongo_logger:
     image: mongo:latest
     container_name: mongo_logger
